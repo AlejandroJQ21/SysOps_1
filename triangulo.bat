@@ -1,4 +1,5 @@
 @echo off
+:inicio
 cls
 echo ================================
 echo      Identificador de Triangulos
@@ -17,7 +18,7 @@ if "%lado1%"=="%lado2%" if "%lado2%"=="%lado3%" (
     echo ================================
     echo El triangulo es Equilatero.
     echo ================================
-    goto fin
+    goto reiniciar
 )
 
 rem Comprobar si es isósceles
@@ -26,7 +27,7 @@ if "%lado1%"=="%lado2%" if not "%lado2%"=="%lado3%" (
     echo ================================
     echo El triangulo es Isosceles.
     echo ================================
-    goto fin
+    goto reiniciar
 )
 
 if "%lado2%"=="%lado3%" if not "%lado1%"=="%lado3%" (
@@ -34,7 +35,7 @@ if "%lado2%"=="%lado3%" if not "%lado1%"=="%lado3%" (
     echo ================================
     echo El triangulo es Isosceles.
     echo ================================
-    goto fin
+    goto reiniciar
 )
 
 if "%lado1%"=="%lado3%" if not "%lado2%"=="%lado1%" (
@@ -42,7 +43,7 @@ if "%lado1%"=="%lado3%" if not "%lado2%"=="%lado1%" (
     echo ================================
     echo El triangulo es Isosceles.
     echo ================================
-    goto fin
+    goto reiniciar
 )
 
 rem Si no es equilátero ni isósceles, es escaleno
@@ -51,6 +52,21 @@ echo ================================
 echo El triangulo es Escaleno.
 echo ================================
 
+
+
+rem El codigo funciona bien, pero le falta un redireccionamiento al inicio para que el usuario pueda ingresar nuevos datos despues de una consulta previa
+
+rem Modificacion del codigo creando un bucle "goto" que redirija el programa hacia el inicio para ingresar nuevos datos
+:reiniciar
+echo.
+echo ¿Desea verificar otro triangulo? (S/N):
+set /p opcion=
+
+if /I "%opcion%"=="S" goto inicio
+if /I "%opcion%"=="N" goto fin
+
+goto reiniciar
+
 :fin
 echo.
-pause 
+pause
